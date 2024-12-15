@@ -1,6 +1,6 @@
 .card{
-    width:300px;
-    height:550px;
+    height:520px;
+    width:250px;
 }
 .card:nth-child(odd){
     background-color:aquamarine;
@@ -10,6 +10,5 @@
 }
 main{
     overflow:auto;
-    height:700px;
-    justify-content:center;
+   height:38rem;
 }

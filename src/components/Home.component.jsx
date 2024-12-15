@@ -65,13 +65,12 @@ export function Home() {
         </nav>
         <main className="col-10 d-flex flex-wrap">
           {products.map((product) =>
-            <div className="card m-4 p-4 ">
-              <div className="card-header mt">
-                <img height="150px" width={200} src={product.image}></img>
-              </div>
-              <div className="card-body ">
-                <label className="form-item" key={product.title}>{product.title}</label>
-
+            <div className="card m-2 p-1">
+                <img height="150" src={product.image}></img>
+                <div className="card-header">
+                  <p className="card-title" key={product.title}>{product.title}</p>
+                </div>
+              <div className="card-body">
                 <dl>
                   <dt>Price</dt>
                   <dd> ₹{product.price}</dd>
@@ -81,7 +80,7 @@ export function Home() {
                 </dl>
               </div>
               <div className="card-footer">
-                <span className="btn btn-danger bi bi-cart4"> Add to Cart</span>
+                <button className="btn btn-danger"> <span className="bi bi-cart4">Add to Cart</span></button>
               </div>
             </div>
           )
