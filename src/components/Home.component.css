@@ -2,6 +2,9 @@
     height:520px;
     width:250px;
 }
+.card:hover {
+    transform: scale(1.05);
+  }
 .card:nth-child(odd){
     background-color:aquamarine;
 }
