@@ -35,6 +35,12 @@ export function Home() {
       .then(res => res.json())
       .then(data => setCategories(["all", ...data]))
   }
+  //delete item from cart
+  function deleteCart(item){
+    setCartItems(cartItems.filter((x)=>x!=item))
+    
+    updateCartSize()
+  }
 
   //function to handle add to cart
   function addToCart(id){
@@ -61,19 +67,53 @@ export function Home() {
         <ol className=" list-unstyled d-flex flex-wrap">
           {
             categories.map((category)=>
-            <li className="me-5" key={category}>{category.toUpperCase()}</li>)
+              <button key={category}className="btn text-white">
+                <li className="me-5" >{category.toUpperCase()}</li>
+              </button>)
           }
         </ol>
         <div className="d-flex flex-wrap">
           <span className="bi bi-search me-4"></span>
           <span className="bi bi-heart me-4"></span>
           <span className="bi bi-person-circle me-4"></span>
-          <button className="btn btn-light position-relative">
+          <button data-bs-target="#cart" data-bs-toggle="modal" className="btn btn-light position-relative">
             <span className="bi bi-cart4 me-4"></span>
             <span className="badge rounded-circle bg-danger position-absolute">{cartSize}</span>
-            
           </button>
+          <div className="modal fade text-black" id="cart" width="1000" height="1000">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h2 className="text-primary">Your Cart Items</h2>
+                  <button data-bs-dismiss='modal' className="btn btn-close"></button>
+                </div>
+                <div className="modal-body">
+                  <table className="table-table-hover">
+                    <thead className="text-align-center">
+                      <tr>
+                        <th className="me-5 text-align-center">Name</th>
+                        <th className="me-5">Preview</th>
+                        <th className="me-5">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody bg-color="gray">
+                      { cartItems.map((item)=>
+                        <tr>
+                          <td>{item.title}</td>
+                          <td ><img src={item.image} width="50px" height="50px"></img></td>
+                          <td>{item.price}</td>
+                          <td><button onClick={()=>deleteCart(item)} className="btn bi-trash-fill btn-danger"></button></td>
+                        </tr>
+                        )
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
       </header>
       <section className="m-4 row">
         <nav className="col-2">
@@ -90,10 +130,10 @@ export function Home() {
         </nav>
         <main className="col-10 d-flex flex-wrap">
           {products.map((product) =>
-            <div className="card m-2 p-2">
+            <div key={product.id} className="card m-2 p-2">
                 <img alt="product_image" height="150" src={product.image}></img>
                 <div className="card-header pb-0">
-                  <p className="card-title" key={product.id}>{product.title}</p>
+                  <p className="card-title" >{product.title}</p>
                 </div>
               <div className="card-body p-0">
                 <dl>
